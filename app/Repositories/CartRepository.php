@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class CartRepository
@@ -17,6 +18,17 @@ class CartRepository
     public function findOrCreateCartForUser(int $userId): Cart
     {
         return Cart::with("cartItems.product")->firstOrCreate(['user_id' => $userId]);
+    }
+
+    /**
+     * Get all items in the cart.
+     *
+     * @param \App\Models\Cart $cart The cart instance
+     * @return \Illuminate\Database\Eloquent\Collection The collection of cart items
+     */
+    public function getCartItems(Cart $cart): Collection
+    {
+        return $cart->cartItems()->with('product')->get();
     }
 
     /**
