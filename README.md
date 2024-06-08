@@ -28,5 +28,30 @@ API authentication is done using bearer tokens provided by Sanctum.
 - Each registered user automatically gets a cart created for them.
 - This is achieved using an event listener.
 
+```
+// Public Routes
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::apiResource('products', ProductController::class)->only(['index', 'show']);
+
+// Protected Routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/profile', [AuthController::class, 'profile']);
+
+    Route::apiResource('categories', CategoryController::class);
+
+    Route::get('cart', [CartController::class, 'index']);
+    Route::post('/cart/add', [CartController::class, 'addProduct']);
+    Route::post('/cart/remove', [CartController::class, 'removeProduct']);
+    Route::post('/cart/empty', [CartController::class, 'emptyCart']);
+
+    Route::get('/orders', [OrderController::class, 'index']);
+    Route::get('/orders/{order}', [OrderController::class, 'show']);
+    Route::post('/orders', [OrderController::class, 'createOrder']);
+});
+```
+
+## Screenshot of Postman Endpoints for the Project
 
 ![Screenshot 2024-06-08 at 8 17 54 PM](https://github.com/okan-aslann/e-commerce/assets/100617362/3c641ade-addc-4e9b-aef4-9b14caf26721)
