@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserCreated;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Cart;
 use App\Models\User;
 use App\Traits\ApiResponses;
 use Illuminate\Http\Request;
@@ -48,6 +50,8 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password'),
         ]);
+
+        event(new UserCreated($user));
 
         $message = 'User registered successfully.';
 
