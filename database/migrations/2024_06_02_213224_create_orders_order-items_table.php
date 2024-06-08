@@ -17,6 +17,7 @@ return new class extends Migration
             $table->mediumText('shipping_address');
             $table->mediumText('billing_address');
             $table->enum('status', ['pending', 'delivered', 'cancelled']);
+            $table->decimal('total_price', 12)->default(0);
             $table->timestamps();
         });
 
