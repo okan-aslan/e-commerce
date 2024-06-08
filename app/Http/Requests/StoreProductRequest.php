@@ -11,7 +11,8 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isSeller());
+        $user = auth()->user();
+        return $user && ($user->role == "admin" || $user->role == "seller");
     }
 
     /**
