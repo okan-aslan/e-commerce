@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -20,4 +21,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', [AuthController::class, 'profile']);
     Route::apiResource('products', ProductController::class);
     Route::apiResource('categories', CategoryController::class);
+
+    Route::get('cart', [CartController::class, 'index']);
+    
+    Route::post('/cart/add', [CartController::class, 'addProduct']);
+    Route::post('/cart/remove', [CartController::class, 'removeProduct']);
+    Route::post('/cart/empty', [CartController::class, 'emptyCart']);
+
 });
