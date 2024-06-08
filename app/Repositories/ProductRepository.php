@@ -18,4 +18,17 @@ class ProductRepository
     {
         return Product::with(['user', 'category'])->findOrFail($productId);
     }
+
+     /**
+     * Update the stock of the given product.
+     *
+     * @param Product $product The product instance
+     * @param int $quantity The quantity to subtract from the stock
+     * @return void
+     */
+    public function updateProductStock(Product $product, int $quantity): void
+    {
+        $product->stock -= $quantity;
+        $product->save();
+    }
 }
