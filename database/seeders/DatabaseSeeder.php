@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -15,21 +16,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
+        User::factory()->has(Cart::factory(1))->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => 'password',
             'role' => 'admin'
         ]);
 
-        User::factory()->create([
+        User::factory()->has(Cart::factory(1))->create([
             'name' => 'Buyer',
             'email' => 'buyer@example.com',
             'password' => 'password',
             'role' => 'buyer',
         ]);
 
-        User::factory()->create([
+        User::factory()->has(Cart::factory(1))->create([
             'id' => 3,
             'name' => 'Seller1',
             'email' => 'seller1@example.com',
@@ -37,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'seller'
         ]);
 
-        User::factory()->create([
+        User::factory()->has(Cart::factory(1))->create([
             'id' => 4,
             'name' => 'Seller2',
             'email' => 'seller2@example.com',
