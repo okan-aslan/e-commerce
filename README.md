@@ -27,3 +27,6 @@ API authentication is done using bearer tokens provided by Sanctum.
 ## User Cart Creation
 - Each registered user automatically gets a cart created for them.
 - This is achieved using an event listener.
+
+
+![Screenshot 2024-06-08 at 8 17 54 PM](https://github.com/okan-aslann/e-commerce/assets/100617362/3c641ade-addc-4e9b-aef4-9b14caf26721)
